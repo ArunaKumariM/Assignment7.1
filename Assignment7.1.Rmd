@@ -1,0 +1,55 @@
+---
+title: "Ass"
+author: "Aruna"
+date: "20 November 2018"
+output: word_document
+---
+```{r}
+#      Write a program to create histogram for all columns
+
+str(mtcars)
+ncol(mtcars)
+names(mtcars)
+
+
+
+library(tidyr)
+library(ggplot2)
+ggplot(gather(mtcars), aes(value)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~key, scales = 'free_x')
+
+```
+
+```{r}
+for (col in 1:ncol(mtcars)) {
+  hist(mtcars[,col],type='l',
+       main=paste("Histogram of mtCars Varibales ",colnames(mtcars[[col]])),
+        ylab=names(mtcars[col]),type="l")
+}
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
