@@ -1,38 +1,54 @@
 ---
-title: "Ass"
+title: "asg"
 author: "Aruna"
-date: "20 November 2018"
+date: "23 November 2018"
 output: word_document
 ---
 ```{r}
-#      Write a program to create histogram for all columns
+#assignment 7.1
 
-str(mtcars)
-ncol(mtcars)
-names(mtcars)
+#1.Histogram of all variables in a dataset mtcars
+#    Write a program to create histograms for all columns
 
-
-
-library(tidyr)
-library(ggplot2)
-ggplot(gather(mtcars), aes(value)) + 
-  geom_histogram(bins = 10) + 
-  facet_wrap(~key, scales = 'free_x')
-
+#par(mfcol=c(3,4))
+for (col in 1:ncol(mtcars)) {
+  hist(mtcars[,col],type='l',
+       main=paste("Histogram of mtCars : ",names(mtcars[col])),
+        xlab=names(mtcars[col]),
+        type="l",
+        col = "blue")
+}
 ```
 
 ```{r}
-for (col in 1:ncol(mtcars)) {
-  hist(mtcars[,col],type='l',
-       main=paste("Histogram of mtCars Varibales ",colnames(mtcars[[col]])),
-        ylab=names(mtcars[col]),type="l")
-}
+#2. Check the probability distribution of all variables in mtcars
+
+library(tidyr)
+library(ggplot2)
+library(plyr)
+ggplot(gather(mtcars), aes(value)) + 
+  geom_density(color ="darkblue",fill="lightblue") +
+  facet_wrap(~key, scales = 'free_x') 
 ```
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r}
+#3. Write a program to create boxplot for all variable
+
+par(mfcol=c(3,4))
+for (col in 1:ncol(mtcars)) {
+  boxplot(mtcars[,col],type='l',
+       main=paste("bloxplot of mtCars : ",names(mtcars[col])),
+       xlab=names(mtcars[col]),
+       type="l",
+       col = "blue")
+}
+```
+
 
 ## R Markdown
 
